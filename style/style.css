@@ -5,4 +5,40 @@
     align-content: flex-end;
     justify-content: space-evenly;
     align-items: center;
+    margin: 5px;
+}
+header{
+    background-color: rgb(113, 143, 106);
+    padding: 10px;
+    text-align: center;
+    margin: 5px;
+    
+}
+
+aside{
+    float: right;
+    background-color: rgb(113, 143, 106);
+    width: 25%;
+    height: 600px;
+    text-align: center;
+    margin: 5px
+}
+
+section{
+    float:left;
+    background-color:rgb(9, 13, 9);
+    width:72%;
+    height: 600px;
+    margin: 5px
+}
+
+footer{
+    float:left;
+    background-color:rgb(113, 143, 106);
+    width:72%;
+    margin: 5px;
+    line-height: 20px
+}
+body{
+    background-image: linear-gradient(0deg, #330774 0%, #8b68c7 35%, #e9df71 100%);
 }
