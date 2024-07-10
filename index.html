@@ -9,6 +9,40 @@
     <title>Mr. 2D Shooterman Game</title>
 </head>
 
+<script>
+
+//Variables
+var canvas = document.querySelector("canvas");
+var ctx = canvas.getContext("2d");
+var player;
+var bullets = [];
+let score = 0;
+let scoreinterval = 0;
+let pressedKeyX = "none";
+let pressedKeyY = "none";
+
+// Player 
+class Player {
+    constructor() {
+        this.x = 240;
+        this.y = 240;
+        this.width = 20;
+        this.height = 20;
+        this.lives = 3;
+        this.update = function() {
+            if (this.lives <= 0) {
+                gameOver = true;
+            }
+        }
+        this.draw = function() {
+            ctx.fillStyle = "blue";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+
+        }
+    }
+}
+</script>
+
 <body>
     <header> 
         <h1>Mr. 2D Shooterman</h1>
