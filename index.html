@@ -16,10 +16,12 @@ var canvas = document.querySelector("canvas");
 var ctx = canvas.getContext("2d");
 var player;
 var bullets = [];
+let bulletInterval = 0;
 let score = 0;
 let scoreinterval = 0;
 let pressedKeyX = "none";
 let pressedKeyY = "none";
+let gameOver = false;
 
 // Player 
 class Player {
@@ -41,6 +43,88 @@ class Player {
         }
     }
 }
+player = new Player;
+
+function runPlayer() {
+    player.update();
+    player.draw();
+    if (pressedKeyX == "A" && player.x > 0) {
+        player.x -= 3;
+    }
+    if (pressedKeyX == "D" && player.x < 480) {
+        player.x += 3;
+    }
+    if (pressedKeyY == "W" && player.y > 0) {
+        player.y -= 3;
+    }
+    if (pressedKeyY == "S" && player.y < 480) {
+        player.y += 3;
+    }
+}
+
+// Event Listeners
+window.addEventListener("keydown", function(e) {
+    if (e.code === "KeyW" & pressedKeyY == "none") pressedKeyY = "S";
+    else if (e.code === "KeyS" && pressedKeyY == "none") pressedKeyY = "S";
+    else if (e.code === "KeyA" && pressedKeyX == "none") pressedKeyX = "A";
+    else if (e.code === "KeyD" && pressedKeyX == "none") pressedKeyX = "D";
+});
+
+window.addEventListener("keyup", function(e) {
+    if (e.code === "KeyW" & pressedKeyY == "W") pressedKeyY = "none";
+    else if (e.code === "KeyS" && pressedKeyY == "S") pressedKeyY = "none";
+    else if (e.code === "KeyA" && pressedKeyX == "A") pressedKeyX = "none";
+    else if (e.code === "KeyD" && pressedKeyX == "D") pressedKeyX = "none";
+});
+
+// Bullets
+class Bullet {
+    constructor(x, y, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.width = 10;
+        this.height = 10;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.update = function() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+        }
+        this.draw = function() {
+            ctx.fillstyle = "red";
+            ctx.fillRect(this.x, this.y, this.width, this.height);
+        }
+    }
+}
+
+function runBullets() {
+    bulletInterval++;
+    if (bulletInterval % 50 == 0) {
+        let y1 = Math.floor(Math.random ()* (491 - 0)) + 0;
+        let y2 = Math.floor(Math.random ()* (491 - 0)) + 0;
+        let x1 = Math.floor(Math.random ()* (491 - 0)) + 0;
+        let x2 = Math.floor(Math.random ()* (491 - 0)) + 0;
+        bullets.push(new Bullet(-10, y1, 2, 0));
+        bullets.push(new Bullet(500, y2, -2, 0));
+        bullets.push(new Bullet(x1, -10, 0, 2));
+        bullets.push(new Bullet(x2, 500, 0, -2));
+    }
+    for (let i = 0; i < bullets.length; i++) {
+        bullets[i].update();
+        bullets[i].draw();
+    }
+}
+
+// Run Game
+function runGame() {
+    ctx.clearRect(0, 0, 500, 500);
+    runPlayer();
+    if (!gameOver) {
+        requestAnimationFrame(runGame);
+    }
+}
+requestAnimationFrame(runGame);
+
 </script>
 
 <body>

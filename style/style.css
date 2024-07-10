@@ -7,6 +7,16 @@
     align-items: center;
     margin: 5px;
 }
+canvas{
+    width: 1050px;
+    height: 599px;
+    background-color: white;
+    position: absolute;
+    top: 15.8%;
+    left: 50%
+    transform: translate(-50%, -50%);
+}
+
 header{
     background-color: rgb(113, 143, 106);
     padding: 10px;
